@@ -2,7 +2,6 @@ import { INewPost, INewUser, IUpdatePost } from '@/types'
 import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from '@tanstack/react-query'
 import { createPost, createUserAccount, deletePost, deleteSavedPost, getCurrentUser, getInfinitePosts, getPostById, getRecentPosts, likePost, savePost, searchPosts, signInAccount, signOutAccount, updatePost } from '../appwrite/api'
 import { QUERY_KEYS } from './queryKeys'
-import { string } from 'zod'
 
 export const useCreateUserAccount = ()=>{
     return useMutation({
@@ -152,9 +151,9 @@ export const useGetPosts = () => {
             }
             const lastId = lastPage?.documents[lastPage?.documents.length-1].$id;
             return lastId;
-        }
-    })
-}
+        },
+    });
+};  
 
 export const useSearchPosts = (searchTerm:string)=> {
     return useQuery({
