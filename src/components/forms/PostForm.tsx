@@ -8,10 +8,10 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "../ui/textarea"
 import FileUploader from "../shared/FileUploader"
 import { PostValidation } from "@/lib/validation"
-import { ID, Models } from "appwrite"
+import {  Models } from "appwrite"
 import { useCreatePost, useUpdatePost } from "@/lib/react-query/queriesAndMutations"
 import { useUserContext } from "@/context/AuthContext"
-import { toast, useToast } from "../ui/use-toast"
+import {  useToast } from "../ui/use-toast"
 import Loader from "../shared/Loader"
 
 type PostFormProps = {

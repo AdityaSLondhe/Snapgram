@@ -1,7 +1,6 @@
-import React, { useCallback, useState } from 'react'
+import  { useCallback, useState } from 'react'
 import { FileWithPath, useDropzone } from 'react-dropzone'
 import { Button } from '../ui/button';
-import { useSearchParams } from 'react-router-dom';
 
 type FileUploaderProps = {
   fieldChange : (FILES :File[])=>void,
