@@ -2,17 +2,20 @@ import Loader from '@/components/shared/Loader';
 import PostStats from '@/components/shared/PostStats';
 import { Button } from '@/components/ui/button';
 import { useUserContext } from '@/context/AuthContext';
-import { useGetPostById } from '@/lib/react-query/queriesAndMutations'
+import { useDeletePost, useGetPostById } from '@/lib/react-query/queriesAndMutations'
 import { formatDate } from '@/lib/utils';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const PostDetails = () => {
+  const navigate = useNavigate();
   const {id}= useParams();
-  const {data:post ,isPending } = useGetPostById(id || '');
+  const {data:post ,isPending } = useGetPostById(id ?? '');
+  const { mutateAsync:deletepost, isPending:isLoadingDelete} = useDeletePost();
   const {user} = useUserContext();
 
   const handleDeletePost =()=>{
-
+    deletepost({postId:id ?? '', imageId: post?.imageId});
+    if(!isLoadingDelete) navigate('/');
   } 
 
   return (
@@ -45,14 +48,15 @@ const PostDetails = () => {
               <div className='flex-center'>
                 <Link to={`/update-post/${post?.$id}`} 
                 className={`${user.id!=post?.creator.$id && 'hidden'}`}>
-                  <img src="/assets/icons/edit.svg" alt="edit" width={24} height={24} />
+                  <img src="/assets/icons/edit.svg" alt="edit" width={24} height={24} className=' hover:scale-110 transition duration-900 ease-in-out'/>
                 </Link>
                 <Button 
                   onClick={handleDeletePost}
                   variant="ghost"
                   className={`${user.id!=post?.creator.$id && 'hidden'} ghost_details-delete_btn`}
                 >
-                  <img src="/assets/icons/delete.svg" alt="delete" width={24} height={24} />
+                  {isLoadingDelete? <Loader/>:<img src="/assets/icons/delete.svg" alt="delete" width={24} height={24} className=' hover:scale-110 transition duration-900 ease-in-out' />}
+                  
                 </Button>
               </div>
             </div>

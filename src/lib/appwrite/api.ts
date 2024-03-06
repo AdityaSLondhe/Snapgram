@@ -299,6 +299,10 @@ export async function deletePost(postId:string,imageId:string){
             appwriteConfig.postCollectionId,
             postId
         )
+        await storage.deleteFile(
+            appwriteConfig.storageId,
+            imageId
+        )
         return {status: 'ok'};
     } catch (error) {
         console.log(error);
@@ -337,5 +341,24 @@ export async function searchPosts(searchTerm : string){
         return posts
     } catch (error) {
         console.log(error);
+    }
+}
+
+export async function getInfiniteUsers({pageParam}: {pageParam:any}){
+    const queries=[Query.limit(20)];
+    if(pageParam){
+        queries.push(Query.cursorAfter(pageParam))
+    }
+    try {
+        const users = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.postCollectionId,
+            queries
+        );
+        if(!users) throw new Error;
+        return users;
+    } catch (error) {
+        console.log(error);
+        throw error;
     }
 }

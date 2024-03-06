@@ -24,6 +24,7 @@ const Explore = () => {
     }
   }, [inView,searchValue])
 
+  
   if(!posts){
     return(
       <div className='flex-center w-full h-full'>
@@ -33,7 +34,9 @@ const Explore = () => {
   }
 
   const shouldShowSearchResults = searchValue!=="";
-  const shouldShowPosts = !shouldShowSearchResults && posts.pages.every((item)=>item.documents.length === 0)
+  // console.log(posts);
+  const shouldShowPosts = !shouldShowSearchResults 
+  // && posts.pages.every((item)=>item.documents.length === 0)
   
   return (
     <div className='explore-container'>
