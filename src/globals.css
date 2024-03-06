@@ -76,7 +76,9 @@
   .invert-white {
     @apply invert brightness-0 transition;
   }
-
+  .invert-primary {
+    @apply  transition text-primary-500;
+  }
   .flex-center {
     @apply flex justify-center items-center;
   }
@@ -184,6 +186,14 @@
   /* Saved */
   .saved-container {
     @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:p-14 custom-scrollbar;
+  }
+
+  .saved-categories button {
+    @apply border border-dark-4 focus:bg-dark-4  min-w-fit;
+  }
+
+  .saved-categories p {
+    @apply mx-2 font-semibold text-sm;
   }
 
   /* Bottom bar */
