@@ -188,8 +188,12 @@
     @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:p-14 custom-scrollbar;
   }
 
+  .saved-categories {
+    @apply hidden md:flex;
+  }
+
   .saved-categories button {
-    @apply border border-dark-4 focus:bg-dark-4  min-w-fit;
+    @apply border border-dark-4 focus:bg-dark-4  min-w-fit md:w-32 lg:w-44;
   }
 
   .saved-categories p {

@@ -1,7 +1,10 @@
+import About from "@/components/shared/About"
 
 const Profile = () => {
   return (
-    <div>Profile</div>
+    <div className="profile-container">
+      <About/>
+    </div>
   )
 }
 

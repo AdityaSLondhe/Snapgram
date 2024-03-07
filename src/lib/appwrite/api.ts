@@ -2,6 +2,7 @@ import { ID, Query } from "appwrite";
 
 import { INewPost, INewUser, IUpdatePost } from "@/types";
 import { account, appwriteConfig, avatars, databases, storage } from "./config";
+import { useGetCurrentUser } from "../react-query/queriesAndMutations";
 
 export async function createUserAccount(user: INewUser) {
     try{
@@ -75,7 +76,6 @@ export async function getCurrentUser(){
             [Query.equal('accountId',currentAccount.$id)]
         )
         if(!currentUser) throw Error;
-
         return currentUser.documents[0];
     } catch (error) {
         console.log(error);
@@ -360,5 +360,28 @@ export async function getInfiniteUsers({pageParam}: {pageParam:any}){
     } catch (error) {
         console.log(error);
         throw error;
+    }
+}
+
+export async function getSavedPosts(){
+    try {
+        const currentAccount = await account.get();
+        if(!currentAccount) throw Error;
+        const currentUser = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.userCollectionId,
+            [Query.equal('accountId',currentAccount.$id)]
+        )
+        if(!currentUser) throw Error;
+        const user = currentUser.documents[0];
+        const savedPosts = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.savesCollectionId,
+            [Query.equal('user',user?.$id)]
+        )
+        if(!savedPosts) throw Error;
+        return savedPosts.documents;
+    } catch (error) {
+        console.log(error);
     }
 }
