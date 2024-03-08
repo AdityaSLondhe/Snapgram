@@ -10,7 +10,6 @@ const Home = () => {
 
   const {data: users,fetchNextPage,hasNextPage}  = useGetUsers();
   const {ref,inView}  = useInView();
-
   useEffect(() => {
     if(inView){
       fetchNextPage();
@@ -45,7 +44,7 @@ const Home = () => {
               </ul>
             )}
         </div>
-        {hasNextPage && (
+        {users && hasNextPage && (
           <div ref={ref} className='mt-10'>
             <Loader/>
           </div>

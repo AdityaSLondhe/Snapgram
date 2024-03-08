@@ -2,7 +2,6 @@ import { ID, Query } from "appwrite";
 
 import { INewPost, INewUser, IUpdatePost } from "@/types";
 import { account, appwriteConfig, avatars, databases, storage } from "./config";
-import { useGetCurrentUser } from "../react-query/queriesAndMutations";
 
 export async function createUserAccount(user: INewUser) {
     try{
