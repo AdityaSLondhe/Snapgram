@@ -34,7 +34,6 @@ const Explore = () => {
   }
 
   const shouldShowSearchResults = searchValue!=="";
-  // console.log(posts);
   const shouldShowPosts = !shouldShowSearchResults 
   // && posts.pages.every((item)=>item.documents.length === 0)
   
