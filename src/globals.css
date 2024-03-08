@@ -170,7 +170,7 @@
     @apply p-0 flex gap-3 hover:bg-transparent hover:text-light-1  text-light-1 small-medium lg:base-medium;
   }
 
-  /* Profile */
+  /* Profile & About */
   .profile-container {
     @apply flex flex-col items-center flex-1 gap-10 overflow-scroll py-10 px-5 md:p-14 custom-scrollbar;
   }
@@ -181,6 +181,22 @@
 
   .profile-tab {
     @apply flex-center gap-3 py-4 w-48 bg-dark-2  transition flex-1 xl:flex-initial;
+  }
+
+  .profile-stats{
+    @apply flex space-x-14 flex-1;
+  }
+
+  .profile-stats p {
+    @apply text-primary-500 text-2xl;
+  }
+
+  .profile-stats h3 {
+    @apply text-xl font-semibold;
+  }
+
+  .profile-bio {
+    @apply my-4;
   }
 
   /* Saved */

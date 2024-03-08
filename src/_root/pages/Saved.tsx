@@ -1,19 +1,15 @@
 import GridPostList from "@/components/shared/GridPostList";
 import Loader from "@/components/shared/Loader";
-import SearchResults from "@/components/shared/SearchResults";
 import { Button } from "@/components/ui/button"
-import { useUserContext } from "@/context/AuthContext";
-import { useGetCurrentUser, useGetPosts, useGetSavedPosts } from "@/lib/react-query/queriesAndMutations";
+import { useGetCurrentUser } from "@/lib/react-query/queriesAndMutations";
 import { Models } from "appwrite";
 import { BookMarked, Clapperboard} from "lucide-react"
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
 
 const Saved = () => {
 
-  const {data:user}=useGetCurrentUser()
+  const {data:user ,isPending:isLoading}=useGetCurrentUser()
 
-  console.log(user?.save)
+  // console.log(user?.save)
   const savePosts = user?.save
     .map((savePost: Models.Document) => ({
       ...savePost.post,
@@ -22,7 +18,6 @@ const Saved = () => {
       },
     }))
     .reverse();
-  console.log(savePosts)
   return (
     <div className="saved-container">
       <div className="flex flex-start w-full space-x-3 max-w-5xl">
@@ -49,7 +44,7 @@ const Saved = () => {
           <img src="/assets/icons/filter.svg" alt="filter" width={20} height={20}/>
         </div>
       </div>
-      {!user ? (<Loader />) : (
+      {isLoading ? (<Loader />) : (
         <ul className="w-full flex justify-center max-w-5xl gap-9">
           {savePosts.length === 0 ? (
             <p className="text-light-4">No available posts</p>
